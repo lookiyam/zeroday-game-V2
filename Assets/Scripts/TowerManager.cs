@@ -26,7 +26,7 @@ public class TowerManager : Singleton<TowerManager> {
 			if ( hit.collider.tag == "BuildSite") {
 				// hit.collider.tag = "BuildSiteFull";
 				buildTile = hit.collider;
-				buildTile.tag = "BuildSiteFull";
+				buildTile.tag = "BuildSite";
 				RegisterBuildSite(buildTile);
 				placeTower(hit);	
 			}
