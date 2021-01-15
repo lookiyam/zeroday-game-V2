@@ -2,6 +2,10 @@
 
 public class Enemy : MonoBehaviour {
 	
+	private float speed;
+	private float boostTimer;
+	private bool boosting;
+
 	[SerializeField]
 	private int healthPoints;
 	[SerializeField]
@@ -28,6 +32,11 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		speed = 1;
+		boostTimer = 0;
+		boosting = false;
+
 		enemy = GetComponent<Transform> ();
 		anim = GetComponent<Animator>();	
 		enemyCollider = GetComponent<Collider2D>();
@@ -37,7 +46,7 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (wayPoints != null && !isDead) {
-			navigationTime += Time.deltaTime;
+			navigationTime += Time.deltaTime * speed;
 			if (navigationTime > navigationUpdate) {
 				if (target < wayPoints.Length) {
 					enemy.position = Vector2.MoveTowards(enemy.position, wayPoints[target].position, 0.8f * navigationTime);
@@ -47,7 +56,18 @@ public class Enemy : MonoBehaviour {
 				navigationTime = 0;
 			}
 		}
+		if(boosting)
+		{
+			boostTimer += Time.deltaTime;
+			if(boostTimer >=3)
+			{
+				speed = 1;
+				boostTimer = 0;
+				boosting = false;
+			}
+		}
 	}
+
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "WayPoint")
@@ -60,6 +80,10 @@ public class Enemy : MonoBehaviour {
 		} else if (other.tag == "Projectile") {
 			Projectile newP = other.gameObject.GetComponent<Projectile>();
 			enemyHit(newP.AttackStrength);
+			Destroy(other.gameObject);
+		} else if (other.tag == "Tower"){
+			boosting = true;
+			speed = -1;
 			Destroy(other.gameObject);
 		}
 	}
