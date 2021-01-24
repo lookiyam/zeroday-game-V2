@@ -26,9 +26,14 @@ public class TowerManager : Singleton<TowerManager> {
 			if ( hit.collider.tag == "BuildSite") {
 				// hit.collider.tag = "BuildSiteFull";
 				buildTile = hit.collider;
-				buildTile.tag = "BuildSite";
+				buildTile.tag = "BuildSiteFull";
 				RegisterBuildSite(buildTile);
 				placeTower(hit);	
+			} else if (hit.collider.tag == "BuildSiteMultiple") {
+				buildTile = hit.collider;
+				buildTile.tag = "BuildSite";
+				RegisterBuildSite(buildTile);
+				placeTower(hit);
 			}
 		}
 		if (spriteRenderer.enabled){
