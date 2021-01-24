@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour {
 			Projectile newP = other.gameObject.GetComponent<Projectile>();
 			enemyHit(newP.AttackStrength);
 			Destroy(other.gameObject);
-		} else if (other.tag == "Tower"){
+		} else if (other.tag == "Block"){
 			boosting = true;
 			speed = -1;
 			Destroy(other.gameObject);

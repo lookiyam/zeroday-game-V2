@@ -28,13 +28,17 @@ public class TowerManager : Singleton<TowerManager> {
 				buildTile = hit.collider;
 				buildTile.tag = "BuildSiteFull";
 				RegisterBuildSite(buildTile);
-				placeTower(hit);	
+				placeTower(hit);
+
 			} else if (hit.collider.tag == "BuildSiteMultiple") {
 				buildTile = hit.collider;
-				buildTile.tag = "BuildSite";
+				buildTile.tag = "BuildSiteMultiple";
 				RegisterBuildSite(buildTile);
 				placeTower(hit);
-			}
+			} 
+
+
+			
 		}
 		if (spriteRenderer.enabled){
 				followMouse();
