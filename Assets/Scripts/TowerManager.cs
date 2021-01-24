@@ -38,6 +38,7 @@ public class TowerManager : Singleton<TowerManager> {
 			} 
 
 
+
 			
 		}
 		if (spriteRenderer.enabled){
