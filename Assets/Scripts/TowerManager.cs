@@ -32,12 +32,10 @@ public class TowerManager : Singleton<TowerManager> {
 
 			} else if (hit.collider.tag == "BuildSiteMultiple") {
 				buildTile = hit.collider;
-				buildTile.tag = "BuildSiteMultiple";
+				buildTile.tag = "BuildSiteMultiple"; 
 				RegisterBuildSite(buildTile);
 				placeTower(hit);
 			} 
-
-
 
 			
 		}
